@@ -1,14 +1,11 @@
 
 <template>
-  <div class="bg-red-500 bottom-2">
-    sokoban
-    {{ map }}
+  <div class="bg-red-500">
+    <Game></Game>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useMapStore } from './store/map';
-
-const { map } = useMapStore()
+import Game from './components/Game.vue'
 
 </script>
