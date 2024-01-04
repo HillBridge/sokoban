@@ -12,7 +12,7 @@ interface Position {
 }
 
 export const useMapStore = defineStore('map', () => {
-    const map = [
+    let map = [
         [1, 1, 1, 1, 1, 1, 1],
         [1, 2, 2, 2, 2, 2, 1],
         [1, 2, 2, 2, 2, 2, 1],

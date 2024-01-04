@@ -118,7 +118,5 @@ describe('player', () => {
             expect(player.y).toBe(5)
         })
     })
-
-    
     
 })
