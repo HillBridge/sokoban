@@ -4,7 +4,11 @@
 
         <Player></Player>
 
-        <Cargo></Cargo>
+        <template v-for="cargo in cargos" :key="cargo.x">
+            <Cargo :x="cargo.x" :y="cargo.y"></Cargo>
+        </template>
+
+
     </div>
 </template>
 
@@ -12,6 +16,10 @@
 import Map from './Map.vue'
 import Player from './Player.vue'
 import Cargo from './Cargo.vue'
+
+import { useCargoStore } from '../store/cargo'
+
+const { cargos } = useCargoStore()
 
 </script>
 

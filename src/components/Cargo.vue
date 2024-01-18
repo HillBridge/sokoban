@@ -4,17 +4,18 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import cargoImg from '../assets/cargo.png'
-import { useMove } from './usePlayer'
 import { usePosition } from '../composables/usePosition'
 
-const cargo = {
-    x: 2,
-    y: 2
+interface Props {
+    x: number,
+    y: number
 }
 
-const position = usePosition(cargo)
+const props = defineProps<Props>()
+
+const position = usePosition(props)
 
 
 </script>
