@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted } from "vue";
 import { usePlayerStore } from "../store/player";
 
 export const useMove = () => {
