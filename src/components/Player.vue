@@ -7,11 +7,15 @@
 <script setup lang="ts">
 
 import playerImg from '../assets/keeper.png'
-import { useMove, usePosition } from './usePlayer'
+import { useMove } from './usePlayer'
+import { usePlayerStore } from "../store/player";
+import { usePosition } from '../composables/usePosition'
 
 useMove()
 
-const position = usePosition()
+const { player } = usePlayerStore();
+
+const position = usePosition(player)
 
 
 
