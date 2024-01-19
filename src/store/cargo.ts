@@ -19,9 +19,15 @@ export const useCargoStore = defineStore('cargo', () => {
     const addCargo = (cargo: Position) => {
         cargos.push(cargo)
     }
+
+    const findCargo = (position: Position) => {
+        return cargos.find(c => c.x === position.x  && c.y === position.y)
+    }
+
     return {
         cargos,
         createCargo,
-        addCargo
+        addCargo,
+        findCargo
     }
 })
