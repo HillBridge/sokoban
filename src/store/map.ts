@@ -6,7 +6,7 @@ export enum MapTile {
 }
 type Map = MapTile[][]
 
-interface Position {
+export interface Position {
     x: number 
     y: number
 }

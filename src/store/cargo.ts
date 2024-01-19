@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { Position } from './map'
 
 interface Cargo {
     x: number;
@@ -6,17 +7,21 @@ interface Cargo {
 }
 
 export const useCargoStore = defineStore('cargo', () => {
-    const cargos: Cargo[] = [
-        {
-            x: 2,
-            y: 2
-        },
-        {
-            x: 3,
-            y: 3
+    const cargos: Cargo[] = []
+
+    const createCargo = (position: Position ) => {
+        return {
+            x: position.x,
+            y: position.y
         }
-    ]
+    }
+
+    const addCargo = (cargo: Position) => {
+        cargos.push(cargo)
+    }
     return {
-        cargos
+        cargos,
+        createCargo,
+        addCargo
     }
 })

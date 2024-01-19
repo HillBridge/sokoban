@@ -1,7 +1,8 @@
 import { it, expect, describe, beforeEach } from 'vitest'
 import { createPinia, setActivePinia } from "pinia";
 import { usePlayerStore } from '../player'
-import { useMapStore} from '../map'
+import { useMapStore } from '../map'
+import { useCargoStore } from '../cargo';
 
 
 describe('player', () => {
@@ -61,6 +62,7 @@ describe('player', () => {
             expect(player.y).toBe(2)
         })
     })
+
     describe('collision wall', () => {
 
         beforeEach(() => {
@@ -117,6 +119,41 @@ describe('player', () => {
     
             expect(player.y).toBe(5)
         })
+    })
+
+    describe('collision cargo', () => {
+        beforeEach(() => {
+            const { setupMap } = useMapStore()
+
+            const newMap = [
+                [1, 1, 1, 1, 1, 1, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 1, 1, 1, 1, 1, 1]
+            ]
+    
+            setupMap(newMap)
+        })
+
+        it('should move to left', () => {
+            const { player, movePlayerToLeft } = usePlayerStore()
+            const { addCargo, createCargo } = useCargoStore()
+
+            const cargo = createCargo({ x: 2, y: 1 })
+            addCargo(cargo)
+
+            player.x = 3
+            player.y = 1
+    
+            movePlayerToLeft()
+    
+            expect(player.x).toBe(2)
+            expect(cargo.x).toBe(1)
+        })
+    
     })
     
 })

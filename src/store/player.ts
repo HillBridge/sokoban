@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 import { useMapStore } from './map'
+import { useCargoStore } from "./cargo";
 
 export const usePlayerStore = defineStore('player', () => {
     const player = reactive({
@@ -10,8 +11,15 @@ export const usePlayerStore = defineStore('player', () => {
 
     const movePlayerToLeft = () => {
         const { isWall } = useMapStore()
+        const { cargos }= useCargoStore()
 
         if (isWall({ x: player.x - 1, y: player.y })) return 
+
+        const cargo = cargos.find(c => c.x === player.x - 1 && c.y === player.y)
+        
+        if (cargo) {
+            cargo.x -= 1
+        }
         
         player.x -= 1
     }

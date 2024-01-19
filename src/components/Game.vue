@@ -19,7 +19,9 @@ import Cargo from './Cargo.vue'
 
 import { useCargoStore } from '../store/cargo'
 
-const { cargos } = useCargoStore()
+const { addCargo, createCargo, cargos } = useCargoStore()
+
+addCargo(createCargo({ x: 2, y: 1 }))
 
 </script>
 
