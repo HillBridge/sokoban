@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { Position } from './map'
+import { reactive } from "vue";
 
 interface Cargo {
     x: number;
@@ -7,7 +8,7 @@ interface Cargo {
 }
 
 export const useCargoStore = defineStore('cargo', () => {
-    const cargos: Cargo[] = []
+    const cargos: Cargo[] = reactive([])
 
     const createCargo = (position: Position ) => {
         return {
