@@ -119,6 +119,70 @@ describe('player', () => {
     
             expect(player.y).toBe(5)
         })
+
+        it('should not push cargo to left when the cargo hits wall', () => {
+            const { player, movePlayerToLeft } = usePlayerStore()
+            const { addCargo, createCargo } = useCargoStore()
+
+            const cargo = createCargo({ x: 1, y: 1 })
+            addCargo(cargo)
+
+            player.x = 2
+            player.y = 1
+    
+            movePlayerToLeft()
+    
+            expect(player.x).toBe(2)
+            expect(cargo.x).toBe(1)
+        })
+
+        it('should not push cargo to right when the cargo hits wall', () => {
+            const { player, movePlayerToRight } = usePlayerStore()
+            const { addCargo, createCargo } = useCargoStore()
+
+            const cargo = createCargo({ x: 5, y: 1 })
+            addCargo(cargo)
+
+            player.x = 4
+            player.y = 1
+    
+            movePlayerToRight()
+    
+            expect(player.x).toBe(4)
+            expect(cargo.x).toBe(5)
+        })
+
+        it('should not push cargo to top when the cargo hits wall', () => {
+            const { player, movePlayerToTop } = usePlayerStore()
+            const { addCargo, createCargo } = useCargoStore()
+
+            const cargo = createCargo({ x: 1, y: 1 })
+            addCargo(cargo)
+
+            player.x = 1
+            player.y = 2
+    
+            movePlayerToTop()
+    
+            expect(player.y).toBe(2)
+            expect(cargo.y).toBe(1)
+        })
+
+        it('should not push cargo to down when the cargo hits wall', () => {
+            const { player, movePlayerToDown } = usePlayerStore()
+            const { addCargo, createCargo } = useCargoStore()
+
+            const cargo = createCargo({ x: 1, y: 5 })
+            addCargo(cargo)
+
+            player.x = 1
+            player.y = 4
+    
+            movePlayerToDown()
+    
+            expect(player.y).toBe(4)
+            expect(cargo.y).toBe(5)
+        })
     })
 
     describe('collision cargo', () => {
@@ -213,7 +277,7 @@ describe('player', () => {
         })
     })
     
-    describe('collision cargo by cargo', () => {
+    describe('collision cargo to cargo', () => {
         beforeEach(() => {
             const { setupMap } = useMapStore()
 
@@ -228,7 +292,7 @@ describe('player', () => {
     
             setupMap(newMap)
         })
-        it('should move to left', () => {
+        it('should not push cargo to left when the cargo hits other cargo', () => {
             const { player, movePlayerToLeft } = usePlayerStore()
             const { addCargo, createCargo } = useCargoStore()
 
@@ -245,6 +309,63 @@ describe('player', () => {
             expect(player.x).toBe(4)
             expect(cargo1.x).toBe(2)
             expect(cargo2.x).toBe(3)
+        })
+
+        it('should not push cargo to right when the cargo hits other cargo', () => {
+            const { player, movePlayerToRight } = usePlayerStore()
+            const { addCargo, createCargo } = useCargoStore()
+
+            const cargo1 = createCargo({ x: 3, y: 1 })
+            addCargo(cargo1)
+            const cargo2 = createCargo({ x: 4, y: 1 })
+            addCargo(cargo2)
+
+            player.x = 2
+            player.y = 1
+    
+            movePlayerToRight()
+    
+            expect(player.x).toBe(2)
+            expect(cargo1.x).toBe(3)
+            expect(cargo2.x).toBe(4)
+        })
+
+        it('should not push cargo to top when the cargo hits other cargo', () => {
+            const { player, movePlayerToTop } = usePlayerStore()
+            const { addCargo, createCargo } = useCargoStore()
+
+            const cargo1 = createCargo({ x: 1, y: 2 })
+            addCargo(cargo1)
+            const cargo2 = createCargo({ x: 1, y: 3 })
+            addCargo(cargo2)
+
+            player.x = 1
+            player.y = 4
+    
+            movePlayerToTop()
+    
+            expect(player.y).toBe(4)
+            expect(cargo1.y).toBe(2)
+            expect(cargo2.y).toBe(3)
+        })
+
+        it('should not push cargo to down when the cargo hits other cargo', () => {
+            const { player, movePlayerToDown } = usePlayerStore()
+            const { addCargo, createCargo } = useCargoStore()
+
+            const cargo1 = createCargo({ x: 1, y: 3 })
+            addCargo(cargo1)
+            const cargo2 = createCargo({ x: 1, y: 4 })
+            addCargo(cargo2)
+
+            player.x = 1
+            player.y = 2
+    
+            movePlayerToDown()
+    
+            expect(player.y).toBe(2)
+            expect(cargo1.y).toBe(3)
+            expect(cargo2.y).toBe(4)
         })
     })
 })

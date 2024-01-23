@@ -10,7 +10,7 @@ export const usePlayerStore = defineStore('player', () => {
     })
 
     const { isWall } = useMapStore()
-    const { findCargo } = useCargoStore()
+    const { findCargo, moveCargo } = useCargoStore()
     
     const _move = (dx: number, dy: number) => {
         const nextPosition = {
@@ -20,21 +20,11 @@ export const usePlayerStore = defineStore('player', () => {
         if (isWall(nextPosition)) return 
 
         const cargo = findCargo(nextPosition)
-        
+
         if (cargo) {
-            const nextCargoPosition = {
-                x: cargo.x + dx,
-                y: cargo.y + dy
-            }
-            if (isWall(nextCargoPosition)) return 
-
-            const nextCargo = findCargo(nextCargoPosition)
-
-            if (nextCargo) return
-        
-
-            cargo.x += dx
-            cargo.y += dy
+            // 保持一个函数中只实现一个功能原则, 引入其他的功能实现细节封装起来, 只当作行为调用, 无需知道具体实现细节
+            const isMoveCargo = moveCargo(cargo, dx, dy)
+            if (!isMoveCargo) return;
         }
         
         player.x += dx
