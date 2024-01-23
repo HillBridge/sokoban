@@ -130,9 +130,7 @@ describe('player', () => {
                 [1, 2, 2, 2, 2, 2, 1],
                 [1, 2, 2, 2, 2, 2, 1],
                 [1, 2, 2, 2, 2, 2, 1],
-                [1, 2, 2, 2, 2, 2, 1],
-                [1, 2, 2, 2, 2, 2, 1],
-                [1, 1, 1, 1, 1, 1, 1]
+                [1, 1, 1, 1, 1, 1, 1],
             ]
     
             setupMap(newMap)
@@ -202,6 +200,16 @@ describe('player', () => {
             expect(cargo.y).toBe(4)
         })
     
+        it('fix bug', () => {
+            const { player, movePlayerToRight } = usePlayerStore()
+
+            player.x = 3
+            player.y = 1
+
+            movePlayerToRight()
+
+            expect(player.x).toBe(4)
+        })
     })
     
 })
