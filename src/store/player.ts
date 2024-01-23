@@ -22,6 +22,17 @@ export const usePlayerStore = defineStore('player', () => {
         const cargo = findCargo(nextPosition)
         
         if (cargo) {
+            const nextCargoPosition = {
+                x: cargo.x + dx,
+                y: cargo.y + dy
+            }
+            if (isWall(nextCargoPosition)) return 
+
+            const nextCargo = findCargo(nextCargoPosition)
+
+            if (nextCargo) return
+        
+
             cargo.x += dx
             cargo.y += dy
         }
