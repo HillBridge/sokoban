@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 import { Position } from './map'
+import { Cargo } from "./cargo";
 
 interface Target {
     x: number;
@@ -21,7 +22,12 @@ export const useTargetStore = defineStore("target", () => {
         targets.push(target)
     }
 
+    const findTarget = (cargo: Cargo) => {
+        return targets.find(t => t.x === cargo.x && t.y === cargo.y)
+    }
+
     return {
+        findTarget,
         createTarget,
         addTarget,
         targets

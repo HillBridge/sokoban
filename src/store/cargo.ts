@@ -2,23 +2,26 @@ import { defineStore } from "pinia";
 import { Position } from './map'
 import { reactive } from "vue";
 import { useMapStore } from './map'
+import { useTargetStore } from "./target";
 
-interface Cargo {
+export interface Cargo {
     x: number;
-    y: number
+    y: number;
+    onTarget: boolean;
 }
 
 export const useCargoStore = defineStore('cargo', () => {
     const cargos: Cargo[] = reactive([])
 
-    const createCargo = (position: Position ) => {
+    const createCargo = ({x, y} : {x: number, y: number}): Cargo => {
         return {
-            x: position.x,
-            y: position.y
+            x,
+            y,
+            onTarget :false
         }
     }
 
-    const addCargo = (cargo: Position) => {
+    const addCargo = (cargo: Cargo) => {
         cargos.push(cargo)
     }
 
@@ -26,7 +29,7 @@ export const useCargoStore = defineStore('cargo', () => {
         return cargos.find(c => c.x === position.x  && c.y === position.y)
     }
 
-    const moveCargo = (cargo: Position, dx: number, dy: number) => {
+    const moveCargo = (cargo: Cargo, dx: number, dy: number) => {
         const { isWall } = useMapStore()
         const nextCargoPosition = {
             x: cargo.x + dx,
@@ -41,7 +44,14 @@ export const useCargoStore = defineStore('cargo', () => {
         cargo.x += dx
         cargo.y += dy
 
+        detectionTarget(cargo)
+
         return true
+    }
+
+    const detectionTarget = (cargo: Cargo) => {
+        const { findTarget } = useTargetStore()
+        cargo.onTarget = !!findTarget(cargo)
     }
 
     return {

@@ -9,7 +9,7 @@
         <Player></Player>
 
         <template v-for="cargo in cargos" :key="cargo.x">
-            <Cargo :x="cargo.x" :y="cargo.y"></Cargo>
+            <Cargo :cargo="cargo"></Cargo>
         </template>
 
     </div>
@@ -31,7 +31,7 @@ addCargo(createCargo({ x: 2, y: 2 }))
 const { createTarget, addTarget, targets } = useTargetStore()
 
 addTarget(createTarget({ x: 3, y: 4 }))
-addTarget(createTarget({ x: 4, y: 4 }))
+addTarget(createTarget({ x: 3, y: 5 }))
 
 </script>
 
