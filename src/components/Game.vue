@@ -12,6 +12,9 @@
             <Cargo :cargo="cargo"></Cargo>
         </template>
 
+        <div style="background-color: rgb(224, 66, 66);" v-if="game.isGameCompeleted">
+            <button>下一关</button>
+        </div>
     </div>
 </template>
 
@@ -23,6 +26,7 @@ import Target from './Target.vue'
 
 import { useCargoStore } from '../store/cargo'
 import { useTargetStore } from '../store/target'
+import { useGameStore } from '../store/game'
 
 const { addCargo, createCargo, cargos } = useCargoStore()
 addCargo(createCargo({ x: 3, y: 2 }))
@@ -30,8 +34,10 @@ addCargo(createCargo({ x: 2, y: 2 }))
 
 const { createTarget, addTarget, targets } = useTargetStore()
 
-addTarget(createTarget({ x: 3, y: 4 }))
+addTarget(createTarget({ x: 1, y: 4 }))
 addTarget(createTarget({ x: 3, y: 5 }))
+
+const { game } = useGameStore()
 
 </script>
 

@@ -1,5 +1,6 @@
 import { onMounted, onUnmounted } from "vue";
 import { usePlayerStore } from "../store/player";
+import { useGameStore } from "../store/game";
 
 export const useMove = () => {
   const {
@@ -8,6 +9,8 @@ export const useMove = () => {
     movePlayerToTop,
     movePlayerToDown,
   } = usePlayerStore();
+
+  const { detectionGameCompeleted } = useGameStore()
 
   const handleKeyup = (e: KeyboardEvent) => {
     switch (e.code) {
@@ -30,6 +33,7 @@ export const useMove = () => {
       default:
         break;
     }
+    detectionGameCompeleted()
   }
 
   onMounted(() => {
