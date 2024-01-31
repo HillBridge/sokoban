@@ -27,6 +27,24 @@ import Target from './Target.vue'
 import { useCargoStore } from '../store/cargo'
 import { useTargetStore } from '../store/target'
 import { useGameStore } from '../store/game'
+import { usePlayerStore } from '../store/player'
+import { useMapStore } from '../store/map'
+
+const { player } = usePlayerStore();
+player.x = 3
+player.y = 1
+
+const { setupMap } = useMapStore()
+const map = [
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 2, 2, 2, 2, 2, 1],
+    [1, 1, 1, 1, 1, 1, 1]
+]
+setupMap(map)
 
 const { addCargo, createCargo, cargos } = useCargoStore()
 addCargo(createCargo({ x: 3, y: 2 }))

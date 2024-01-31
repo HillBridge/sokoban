@@ -17,8 +17,6 @@ const { player } = usePlayerStore();
 
 const position = usePosition(player)
 
-
-
 </script>
 
 <style scoped>
