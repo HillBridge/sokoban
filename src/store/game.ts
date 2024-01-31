@@ -4,20 +4,13 @@ import { reactive } from "vue";
 import { useMapStore, type Map } from './map'
 import { usePlayerStore } from "./player";
 import { useTargetStore } from "./target";
+import { LevelGameData } from "../game/gameData";
 
 interface Game {
     isGameCompeleted: boolean
 }
 
-interface LevelGameData {
-    player: {
-        x: number
-        y: number
-    }
-    map: Map
-    cargos: { x: number, y: number }[]
-    targets: { x: number, y: number }[]
-}
+
 
 export const useGameStore = defineStore('game', () => {
     const game = reactive<Game>({
@@ -38,7 +31,7 @@ export const useGameStore = defineStore('game', () => {
         player.x = levelGameData.player.x
         player.y = levelGameData.player.y
         setupMap(levelGameData.map)
-        
+
         levelGameData.cargos.forEach(c => addCargo(createCargo({ x: c.x, y: c.y })))
         levelGameData.targets.forEach(t =>addTarget(createTarget({ x: t.x, y: t.y })))
 
