@@ -27,35 +27,51 @@ import Target from './Target.vue'
 import { useCargoStore } from '../store/cargo'
 import { useTargetStore } from '../store/target'
 import { useGameStore } from '../store/game'
-import { usePlayerStore } from '../store/player'
-import { useMapStore } from '../store/map'
 
-const { player } = usePlayerStore();
-player.x = 3
-player.y = 1
+const levelGameData = {
+    player: {
+        x: 2,
+        y: 1
+    },
+    map: [
+        [1, 1, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 1, 1]
+    ],
+    cargos: [
+        {
+            x: 3,
+            y: 2
+        },
+        {
+            x: 2,
+            y: 2
+        }
+    ],
+    targets: [
+        {
+            x: 2,
+            y: 4
+        },
+        {
+            x: 3,
+            y: 5
+        }
+    ]
+}
 
-const { setupMap } = useMapStore()
-const map = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 2, 2, 2, 2, 2, 1],
-    [1, 2, 2, 2, 2, 2, 1],
-    [1, 2, 2, 2, 2, 2, 1],
-    [1, 2, 2, 2, 2, 2, 1],
-    [1, 2, 2, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1, 1, 1]
-]
-setupMap(map)
+const { game, setupData } = useGameStore()
 
-const { addCargo, createCargo, cargos } = useCargoStore()
-addCargo(createCargo({ x: 3, y: 2 }))
-addCargo(createCargo({ x: 2, y: 2 }))
+setupData(levelGameData)
 
-const { createTarget, addTarget, targets } = useTargetStore()
+const { cargos } = useCargoStore()
 
-addTarget(createTarget({ x: 1, y: 4 }))
-addTarget(createTarget({ x: 3, y: 5 }))
+const { targets } = useTargetStore()
 
-const { game } = useGameStore()
 
 </script>
 

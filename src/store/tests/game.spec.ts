@@ -4,6 +4,7 @@ import { useCargoStore } from '../cargo'
 import { useTargetStore } from '../target';
 import { useGameStore } from '../game';
 import { useMapStore } from '../map';
+import { usePlayerStore } from '../player';
 
 describe('useGameStore', () => {
     beforeEach(() => {
@@ -56,5 +57,57 @@ describe('useGameStore', () => {
         detectionGameCompeleted()
 
         expect(game.isGameCompeleted).toBe(false)
+    })
+
+    it('should setupData', () => {
+        const levelGameData = {
+            player: {
+                x: 2,
+                y: 1
+            },
+            map: [
+                [1, 1, 1, 1, 1, 1, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 1, 1, 1, 1, 1, 1]
+            ],
+            cargos: [
+                {
+                    x: 3,
+                    y: 2
+                },
+                {
+                    x: 2,
+                    y: 2
+                }
+            ],
+            targets: [
+                {
+                    x: 1,
+                    y: 4
+                },
+                {
+                    x: 3,
+                    y: 5
+                }
+            ]
+        }
+
+        const { setupData } = useGameStore()
+        const { map } = useMapStore()
+        const { player } = usePlayerStore()
+        const { cargos } = useCargoStore()
+        const { targets } = useTargetStore()
+        
+        setupData(levelGameData)
+
+        expect(player.x).toBe(levelGameData.player.x)
+        expect(player.y).toBe(levelGameData.player.y)
+        expect(map).toEqual(levelGameData.map)
+        expect(cargos.length).toEqual(levelGameData.cargos.length)
+        expect(targets.length).toEqual(levelGameData.targets.length)
     })
 })
