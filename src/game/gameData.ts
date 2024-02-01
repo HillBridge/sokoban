@@ -84,5 +84,41 @@ export const secondLevelGameData: LevelGameData = {
     ]
 }
 
+export const thirdLevelGameData: LevelGameData = {
+    player: {
+        x: 2,
+        y: 1
+    },
+    map: [
+        [1, 1, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 1, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 2, 2, 2, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1]
+    ],
+    cargos: [
+        {
+            x: 3,
+            y: 2
+        },
+        {
+            x: 2,
+            y: 2
+        }
+    ],
+    targets: [
+        {
+            x: 3,
+            y: 4
+        },
+        {
+            x: 3,
+            y: 5
+        }
+    ]
+}
 
-export const gameData: GameData = [firstLevelGameData, secondLevelGameData]
+
+export const gameData: GameData = [firstLevelGameData, secondLevelGameData, thirdLevelGameData]
