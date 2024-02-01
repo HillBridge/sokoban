@@ -5,16 +5,20 @@ import { useMapStore } from './map'
 import { useTargetStore } from "./target";
 
 export interface Cargo {
+    id: number
     x: number;
     y: number;
     onTarget: boolean;
 }
+
+let id = 1
 
 export const useCargoStore = defineStore('cargo', () => {
     const cargos: Cargo[] = reactive([])
 
     const createCargo = ({x, y} : {x: number, y: number}): Cargo => {
         return {
+            id: id++,
             x,
             y,
             onTarget :false

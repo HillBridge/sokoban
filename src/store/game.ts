@@ -29,8 +29,13 @@ export const useGameStore = defineStore('game', () => {
         setupLevel()
     }
 
+    const setupGameCompeletedStatus = () => {
+        game.isGameCompeleted = false
+    }
+
     const toNextLevel = () => {
         game.level += 1
+        setupGameCompeletedStatus()
         setupLevel()
     }
 

@@ -154,6 +154,18 @@ describe('useGameStore', () => {
         expectSetupData(secondlevelGameData)
     })
 
+    it('should be reset isGameCompeleted status when to next level', () => {
+        const { setupData, toNextLevel, game } = useGameStore()
+        setupData(gameData)
+
+        game.isGameCompeleted = true
+
+        toNextLevel()
+
+        expect(game.isGameCompeleted).toBe(false)
+        expectSetupData(secondlevelGameData)
+    })
+
     function expectSetupData(levelGameData: LevelGameData) {
         const { map } = useMapStore()
         const { player } = usePlayerStore()

@@ -8,12 +8,12 @@
 
         <Player></Player>
 
-        <template v-for="cargo in cargos" :key="cargo.x">
+        <template v-for="cargo in cargos" :key="cargo.id">
             <Cargo :cargo="cargo"></Cargo>
         </template>
 
-        <div style="background-color: rgb(224, 66, 66);" v-if="game.isGameCompeleted">
-            <button>下一关</button>
+        <div style="background-color: rgb(242, 15, 15);" v-if="game.isGameCompeleted">
+            <button @click="toNextLevel">下一关</button>
         </div>
     </div>
 </template>
@@ -30,7 +30,7 @@ import { useGameStore } from '../store/game'
 import { gameData } from '../game/gameData'
 
 
-const { game, setupData } = useGameStore()
+const { game, setupData, toNextLevel } = useGameStore()
 
 setupData(gameData)
 
