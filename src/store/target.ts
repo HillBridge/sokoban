@@ -26,10 +26,15 @@ export const useTargetStore = defineStore("target", () => {
         return targets.find(t => t.x === cargo.x && t.y === cargo.y)
     }
 
+    const cleanAllTargets = () => {
+        targets.splice(0, targets.length)
+    }
+
     return {
         findTarget,
         createTarget,
         addTarget,
-        targets
+        targets,
+        cleanAllTargets
     }
 })

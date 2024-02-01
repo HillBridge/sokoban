@@ -26,36 +26,29 @@ export const useGameStore = defineStore('game', () => {
 
     const setupData = (gameData: GameData) => {
         _gameData = gameData
-        const { setupMap } = useMapStore()
-        const { player } = usePlayerStore()
-        const { addCargo, createCargo } = useCargoStore()
-        const { addTarget, createTarget } = useTargetStore()
-
-        const levelGameData = gameData[game.level-1]
-
-        player.x = levelGameData.player.x
-        player.y = levelGameData.player.y
-        setupMap(levelGameData.map)
-
-        levelGameData.cargos.forEach(c => addCargo(createCargo({ x: c.x, y: c.y })))
-        levelGameData.targets.forEach(t =>addTarget(createTarget({ x: t.x, y: t.y })))
-
+        setupLevel()
     }
 
     const toNextLevel = () => {
+        game.level += 1
+        setupLevel()
+    }
+
+    function setupLevel() {
         const { setupMap } = useMapStore()
         const { player } = usePlayerStore()
-        const { addCargo, createCargo } = useCargoStore()
-        const { addTarget, createTarget } = useTargetStore()
-
-        game.level += 1
+        const { addCargo, createCargo, cleanAllCargos } = useCargoStore()
+        const { addTarget, createTarget, cleanAllTargets } = useTargetStore()
         const levelGameData = _gameData[game.level-1]
 
         player.x = levelGameData.player.x
         player.y = levelGameData.player.y
         setupMap(levelGameData.map)
 
+        cleanAllCargos()
         levelGameData.cargos.forEach(c => addCargo(createCargo({ x: c.x, y: c.y })))
+
+        cleanAllTargets()
         levelGameData.targets.forEach(t =>addTarget(createTarget({ x: t.x, y: t.y })))
     }
 

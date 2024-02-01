@@ -54,12 +54,17 @@ export const useCargoStore = defineStore('cargo', () => {
         cargo.onTarget = !!findTarget(cargo)
     }
 
+    const cleanAllCargos = () => {
+        cargos.splice(0 ,cargos.length)
+    }
+
     return {
         cargos,
         createCargo,
         addCargo,
         findCargo,
-        moveCargo
+        moveCargo,
+        cleanAllCargos
     }
 })
 

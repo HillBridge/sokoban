@@ -48,5 +48,15 @@ describe('useTargetStore', () => {
 
         expect(cargo.onTarget).toBe(false)
     })
+
+    it('clean all targets', () => {
+        const { addTarget, createTarget, targets, cleanAllTargets } = useTargetStore()
+        addTarget(createTarget({ x: 3, y: 1 }))
+        addTarget(createTarget({ x: 3, y: 2 }))
+
+        cleanAllTargets()
+
+        expect(targets.length).toBe(0)
+    })
      
 })
