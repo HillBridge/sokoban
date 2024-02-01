@@ -27,12 +27,12 @@ import Target from './Target.vue'
 import { useCargoStore } from '../store/cargo'
 import { useTargetStore } from '../store/target'
 import { useGameStore } from '../store/game'
-import { levelGameData } from '../game/gameData'
+import { gameData } from '../game/gameData'
 
 
 const { game, setupData } = useGameStore()
 
-setupData(levelGameData)
+setupData(gameData)
 
 const { cargos } = useCargoStore()
 

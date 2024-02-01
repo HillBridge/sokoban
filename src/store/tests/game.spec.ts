@@ -59,7 +59,7 @@ describe('useGameStore', () => {
         expect(game.isGameCompeleted).toBe(false)
     })
 
-    it('should setupData', () => {
+    it('should setup game', () => {
         const levelGameData = {
             player: {
                 x: 2,
@@ -101,13 +101,107 @@ describe('useGameStore', () => {
         const { player } = usePlayerStore()
         const { cargos } = useCargoStore()
         const { targets } = useTargetStore()
+
+        const gameData = [levelGameData]
         
-        setupData(levelGameData)
+        setupData(gameData)
 
         expect(player.x).toBe(levelGameData.player.x)
         expect(player.y).toBe(levelGameData.player.y)
         expect(map).toEqual(levelGameData.map)
         expect(cargos.length).toEqual(levelGameData.cargos.length)
         expect(targets.length).toEqual(levelGameData.targets.length)
+    })
+
+    it('should next level', () => {
+        const levelGameData = {
+            player: {
+                x: 2,
+                y: 1
+            },
+            map: [
+                [1, 1, 1, 1, 1, 1, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 1, 1, 1, 1, 1, 1]
+            ],
+            cargos: [
+                {
+                    x: 3,
+                    y: 2
+                },
+                {
+                    x: 2,
+                    y: 2
+                }
+            ],
+            targets: [
+                {
+                    x: 1,
+                    y: 4
+                },
+                {
+                    x: 3,
+                    y: 5
+                }
+            ]
+        }
+        const secondlevelGameData = {
+            player: {
+                x: 3,
+                y: 1
+            },
+            map: [
+                [1, 1, 1, 1, 1, 1, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1],
+                [1, 1, 1, 1, 1, 1, 1]
+            ],
+            cargos: [
+                {
+                    x: 3,
+                    y: 2
+                },
+                {
+                    x: 2,
+                    y: 2
+                }
+            ],
+            targets: [
+                {
+                    x: 1,
+                    y: 4
+                },
+                {
+                    x: 3,
+                    y: 5
+                }
+            ]
+        }
+
+        const { setupData, toNextLevel, game } = useGameStore()
+        const { map } = useMapStore()
+        const { player } = usePlayerStore()
+        const { cargos } = useCargoStore()
+        const { targets } = useTargetStore()
+
+        const gameData = [levelGameData, secondlevelGameData]
+        
+        setupData(gameData)
+
+        toNextLevel()
+
+        expect(game.level).toBe(2)
+        expect(player.x).toBe(secondlevelGameData.player.x)
+        expect(player.y).toBe(secondlevelGameData.player.y)
+        expect(map).toEqual(secondlevelGameData.map)
+        expect(cargos.length).toEqual(secondlevelGameData.cargos.length)
+        expect(targets.length).toEqual(secondlevelGameData.targets.length)
     })
 })

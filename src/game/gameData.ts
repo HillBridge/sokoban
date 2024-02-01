@@ -10,6 +10,8 @@ export interface LevelGameData {
     targets: { x: number, y: number }[]
 }
 
+export type GameData = LevelGameData[]
+
 export const levelGameData: LevelGameData = {
     player: {
         x: 2,
@@ -45,3 +47,6 @@ export const levelGameData: LevelGameData = {
         }
     ]
 }
+
+
+export const gameData: GameData = [levelGameData]
