@@ -1,0 +1,53 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add vue-router
+
+PATH: 
+  /usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  20.0.0
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/Users/bridge/Library/Caches/Yarn/v6/npm-glob-parent-6.0.2-6d237d99083950c79290f24c7642a3de9a28f9e3-integrity/node_modules/glob-parent/README.md' -> '/Users/bridge/workInXcloud/mine-bridge/sokoban/node_modules/tailwindcss/node_modules/glob-parent/README.md'
+
+npm manifest: 
+  {
+    "name": "vite-project",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+      "dev": "vite",
+      "build": "vue-tsc && vite build",
+      "preview": "vite preview",
+      "test": "vitest run",
+      "coverage": "vitest run --coverage"
+    },
+    "dependencies": {
+      "pinia": "^2.1.7",
+      "vue": "^3.3.11"
+    },
+    "devDependencies": {
+      "@types/node": "^20.10.5",
+      "@vitejs/plugin-vue": "^4.5.2",
+      "autoprefixer": "^10.4.16",
+      "postcss": "^8.4.32",
+      "tailwindcss": "^3.4.0",
+      "typescript": "^5.2.2",
+      "vite": "^5.0.8",
+      "vitest": "^1.1.0",
+      "vue-tsc": "^1.8.25"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
